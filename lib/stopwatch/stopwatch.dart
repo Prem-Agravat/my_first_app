@@ -170,7 +170,7 @@ class _StopWatchExampleState extends State<StopWatchExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.name)),
+      appBar: AppBar(title: Text(widget.name + " " + widget.email)),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
