@@ -24,6 +24,29 @@ class _ControlInputState extends State<ControlInput> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            TextField(
+              controller: textcontroller,
+              decoration: const InputDecoration(
+                labelText: 'name',
+                border: OutlineInputBorder(),
+              ),
+              onChanged: (_) => setState(() {}),
+            ),
+            SizedBox(height: 20),
+            Text('Read : ${textcontroller.text}'),
+            ElevatedButton(
+              onPressed: setTextValue,
+              child: const Text('Set Text'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
