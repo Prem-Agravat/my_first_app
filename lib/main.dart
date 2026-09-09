@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_first_app/stopwatch/login.dart';
-import 'package:my_first_app/stopwatch/stopwatch.dart';
 import 'package:my_first_app/inputcontrol/inputtextcontrol.dart';
 
 void main() {

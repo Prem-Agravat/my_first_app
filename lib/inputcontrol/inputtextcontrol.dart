@@ -33,7 +33,7 @@ class _ControlInputState extends State<ControlInput> {
             TextField(
               controller: textcontroller,
               decoration: const InputDecoration(
-                labelText: 'name',
+                labelText: 'Enter name',
                 border: OutlineInputBorder(),
               ),
               onChanged: (_) => setState(() {}),
