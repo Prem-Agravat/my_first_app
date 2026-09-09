@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-
-class ChkBoxDemo extends StatefulWidget {
-  const ChkBoxDemo({super.key});
+class ChkBoxExam extends StatefulWidget {
+  const ChkBoxExam({super.key});
 
   @override
-  State<ChkBoxDemo> createState() => _ChkBoxDemoState();
+  State<ChkBoxExam> createState() => _ChkBoxExamState();
 }
 
-class _ChkBoxDemoState extends State<ChkBoxDemo> {
+class _ChkBoxExamState extends State<ChkBoxExam> {
   bool ischecked = false;
 
-  void UpdateChkBox() {
+  void updateChkBox(){
     setState(() {
       ischecked = !ischecked;
     });
@@ -27,16 +26,12 @@ class _ChkBoxDemoState extends State<ChkBoxDemo> {
             CheckboxListTile(
               title: const Text("Check Box"),
               value: ischecked,
-              onChanged: (v) => {
-                setState(() {
-                  ischecked = v!;
-                }),
-              },
+              onChanged: (v) => setState(() {
+                ischecked = v!;
+              }),
             ),
-            Text('Read ${ischecked ? 'Agree' : 'Disagree'}'),
-            ElevatedButton(
-              onPressed: UpdateChkBox,
-              child: const Text("Agree / Disagree"),
+            Text('Read ${ischecked ? 'Agree':'Disagree'}'),
+            ElevatedButton(onPressed: updateChkBox, child: const Text('Agree/Disagree')
             ),
           ],
         ),

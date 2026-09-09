@@ -13,6 +13,6 @@ class StopWatchRun extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: ChkBoxDemo());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: ChkBoxExam());
   }
 }
