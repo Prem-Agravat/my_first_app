@@ -18,7 +18,7 @@ class _ControlInputState extends State<ControlInput> {
 
   void setTextValue() {
     setState(() {
-      textcontroller.text = "Hello World";
+      textcontroller.text = textcontroller.text; // Update the text value
     });
   }
 
