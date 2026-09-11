@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_first_app/inputcontrol/chkbox.dart';
-import 'package:my_first_app/inputcontrol/inputtextcontrol.dart';
-import 'package:my_first_app/inputcontrol/radiobutton.dart';
+import 'package:my_first_app/inputcontrol/calanderexample.dart';
 import 'package:my_first_app/inputcontrol/sliderexample.dart';
 
 void main() {
@@ -16,7 +14,7 @@ class StopWatchRun extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SliderExample(),
+      home: CalendExample(),
     );
   }
 }
