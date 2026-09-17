@@ -32,6 +32,9 @@ class _ScrollImageState extends State<ScrollImage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: SafeArea(child: ScrollDisp()));
+    return Scaffold(
+      appBar: AppBar(title: Text("Scroll Image")),
+      body: SafeArea(child: ScrollDisp()),
+    );
   }
 }
