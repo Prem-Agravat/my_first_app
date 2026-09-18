@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/stopwatch/registration.dart';
 import 'package:my_first_app/stopwatch/stopwatch.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -73,9 +74,22 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(onPressed: _validate, child: const Text('Login')),
+            const SizedBox(height: 30),
+
+            ElevatedButton(
+              onPressed: _register,
+              child: Text('Cant have account? Register'),
+            ),
           ],
         ),
       ),
+    );
+  }
+
+  void _register() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Registration()),
     );
   }
 

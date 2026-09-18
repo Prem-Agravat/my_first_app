@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/inputcontrol/gridview.dart';
 import 'package:my_first_app/inputcontrol/imagedisplay.dart';
 import 'package:my_first_app/inputcontrol/scrollviewimage.dart';
+import 'package:my_first_app/inputcontrol/tabview.dart';
+import 'package:my_first_app/stopwatch/login.dart';
 
 void main() {
   runApp(const StopWatchRun());
@@ -12,6 +15,6 @@ class StopWatchRun extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: ScrollImage());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: LoginScreen());
   }
 }
