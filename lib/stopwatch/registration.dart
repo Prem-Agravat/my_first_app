@@ -26,10 +26,9 @@ class _RegistrationState extends State<Registration> {
   bool isGraduate = false;
 
   String city = 'city 1';
-  double value = 48;
+  double value = 20000;
 
   DateTime? data;
-  TimeOfDay? time;
 
   @override
   void dispose() {
@@ -49,15 +48,6 @@ class _RegistrationState extends State<Registration> {
     );
     if (!mounted || picked == null) return;
     setState(() => data = picked);
-  }
-
-  Future<void> pickTime() async {
-    final picked = await showTimePicker(
-      context: context,
-      initialTime: time ?? TimeOfDay.now(),
-    );
-    if (!mounted || picked == null) return;
-    setState(() => time = picked);
   }
 
   @override
@@ -208,16 +198,16 @@ class _RegistrationState extends State<Registration> {
               const SizedBox(height: 10),
               Slider(
                 value: value,
-                min: 48,
-                max: 84,
-                divisions: 36,
+                min: 20000,
+                max: 100000,
+                divisions: 30,
                 onChanged: (double newValue) {
                   setState(() {
                     value = newValue;
                   });
                 },
               ),
-              Text('Height: ${value.round()} inch'),
+              Text('Fees: ${value.round()}'),
               const SizedBox(height: 15),
               Text(
                 data == null
@@ -228,16 +218,7 @@ class _RegistrationState extends State<Registration> {
                 onPressed: pickData,
                 child: const Text("Pick DOB"),
               ),
-              const SizedBox(height: 10),
-              Text(
-                time == null
-                    ? 'No Time'
-                    : "Time: ${time!.hour}:${time!.minute.toString().padLeft(2, '0')}",
-              ),
-              ElevatedButton(
-                onPressed: pickTime,
-                child: const Text("Pick Time"),
-              ),
+
               const SizedBox(height: 20),
               ElevatedButton(onPressed: _validate, child: const Text('Submit')),
             ],
@@ -285,9 +266,6 @@ class _RegistrationState extends State<Registration> {
             city: city,
             height: value.round().toString(),
             dob: "${data!.day}/${data!.month}/${data!.year}",
-            time: time != null
-                ? "${time!.hour}:${time!.minute.toString().padLeft(2, '0')}"
-                : "No Time",
           ),
         ),
       );
@@ -303,7 +281,6 @@ class DisplayInfo extends StatelessWidget {
   final String city;
   final String height;
   final String dob;
-  final String time;
 
   const DisplayInfo({
     super.key,
@@ -314,7 +291,6 @@ class DisplayInfo extends StatelessWidget {
     required this.city,
     required this.height,
     required this.dob,
-    required this.time,
   });
 
   @override
@@ -341,14 +317,9 @@ class DisplayInfo extends StatelessWidget {
                 const SizedBox(height: 10),
                 Text('City: $city', style: const TextStyle(fontSize: 18)),
                 const SizedBox(height: 10),
-                Text(
-                  'Height: $height inch',
-                  style: const TextStyle(fontSize: 18),
-                ),
+                Text('Fees: $height', style: const TextStyle(fontSize: 18)),
                 const SizedBox(height: 10),
                 Text('DOB: $dob', style: const TextStyle(fontSize: 18)),
-                const SizedBox(height: 10),
-                Text('Time: $time', style: const TextStyle(fontSize: 18)),
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {

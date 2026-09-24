@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/resources/inpurtstring.dart';
 
 class GridExample extends StatefulWidget {
   const GridExample({super.key});
@@ -23,13 +24,19 @@ class _GridExampleState extends State<GridExample> {
       body: Center(
         child: GridView.count(
           crossAxisCount: 2,
-          crossAxisSpacing: 6,
-          mainAxisSpacing: 6,
+          crossAxisSpacing: 5,
+          mainAxisSpacing: 5,
           children: [
-            for (final topic in topics)
+            for (final name in topics)
               Card(
-                color: Colors.blue.shade400,
-                child: Center(child: Text(topic)),
+                elevation: 20,
+                color: Colors.blueGrey.shade400,
+                child: Center(
+                  child: Text(
+                    name,
+                    style: TextStyle(fontSize: 17, color: Colors.white),
+                  ),
+                ),
               ),
           ],
         ),

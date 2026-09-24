@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/inputcontrol/gridview.dart';
 import 'package:my_first_app/inputcontrol/scrollviewimage.dart';
 import 'package:my_first_app/stopwatch/login.dart';
 
@@ -18,22 +19,20 @@ class _TabExampleState extends State<TabExample> {
         appBar: AppBar(
           bottom: const TabBar(
             tabs: [
-              Tab(icon: Icon(Icons.home), text: 'Home'),
-              Tab(icon: Icon(Icons.settings), text: 'Settings'),
-              Tab(icon: Icon(Icons.message_sharp), text: 'Messages'),
+              Tab(icon: Icon(Icons.home), text: 'GridView'),
+              Tab(icon: Icon(Icons.settings), text: 'Scroll_img_1'),
+              Tab(icon: Icon(Icons.message_sharp), text: 'Scroll_img_2'),
             ],
           ),
         ),
         body: const TabBarView(
           children: [
-            Center(child: LoginScreen()),
+            Center(child: GridExample()),
             Center(child: ScrollImage()),
-            Center(child: Text("Messages")),
+            Center(child: ScrollImage()),
           ],
         ),
-        
       ),
-
     );
   }
 }
