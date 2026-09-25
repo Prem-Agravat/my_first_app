@@ -101,17 +101,17 @@ class _StopWatchExampleState extends State<StopWatchExample> {
         ElevatedButton(
           onPressed: isRunning ? null : _startTimer,
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
-            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            backgroundColor: WidgetStateProperty.all<Color>(Colors.green),
+            foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
           ),
           child: const Text('Start'),
         ),
         ElevatedButton(
           onPressed: _lap,
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
-            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            backgroundColor: WidgetStateProperty.all<Color>(Colors.orange),
+            foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             ),
           ),
@@ -120,16 +120,16 @@ class _StopWatchExampleState extends State<StopWatchExample> {
         ElevatedButton(
           onPressed: _clear,
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            backgroundColor: WidgetStateProperty.all<Color>(Colors.blue),
+            foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
           ),
           child: const Text('Clear'),
         ),
         ElevatedButton(
           onPressed: isRunning ? _stopTimer : null,
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
-            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            backgroundColor: WidgetStateProperty.all<Color>(Colors.red),
+            foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
           ),
           child: const Text('Stop'),
         ),
@@ -170,7 +170,7 @@ class _StopWatchExampleState extends State<StopWatchExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.name + " " + widget.email)),
+      appBar: AppBar(title: Text("${widget.name} ${widget.email}")),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

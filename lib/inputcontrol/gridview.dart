@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_first_app/resources/inpurtstring.dart';
 
 class GridExample extends StatefulWidget {
   const GridExample({super.key});
