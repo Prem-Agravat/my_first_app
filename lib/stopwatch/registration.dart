@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:my_first_app/stopwatch/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Registration extends StatefulWidget {
   const Registration({super.key});
@@ -8,6 +12,8 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
+  List<Map<String, dynamic>> items = [];
+  static const _key = 'entries';
   bool Register = false;
   String name = '';
   String email = '';
@@ -37,6 +43,37 @@ class _RegistrationState extends State<Registration> {
     _passController.dispose();
     _cpassController.dispose();
     super.dispose();
+  }
+
+  Future<void> _save() async {
+    if (_nameController.text.trim().isEmpty ||
+        _emailController.text.trim().isEmpty ||
+        _passController.text.trim().isEmpty ||
+        _cpassController.text.trim().isEmpty) {
+      return;
+    }
+
+    List<String> qList = [];
+
+    if (is10th) qList.add('10th');
+    if (is11th) qList.add('11th');
+    if (is12th) qList.add('12th');
+    if (isGraduate) qList.add('Graduate');
+
+    items.add({
+      'name': _nameController.text.trim(),
+      'email': _emailController.text.trim(),
+      'pass': _passController.text,
+      'gender': gender,
+      'qualification': qList.join(', '),
+      'city': city,
+      'fee': value.round(),
+      'dob': data != null ? '${data!.day}/${data!.month}/${data!.year}' : '',
+    });
+
+    final pref = await SharedPreferences.getInstance();
+
+    await pref.setString(_key, jsonEncode(items));
   }
 
   Future<void> pickData() async {
@@ -228,8 +265,9 @@ class _RegistrationState extends State<Registration> {
     );
   }
 
-  void _validate() {
+  Future<void> _validate() async {
     final form = _formKey.currentState;
+
     if (form != null && form.validate()) {
       if (!is10th && !is11th && !is12th && !isGraduate) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -237,35 +275,36 @@ class _RegistrationState extends State<Registration> {
         );
         return;
       }
+
       if (data == null) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Please select Date of Birth')),
         );
         return;
       }
-      setState(() {
-        name = _nameController.text;
-        email = _emailController.text;
-        Register = true;
-      });
 
       List<String> qList = [];
+
       if (is10th) qList.add('10th');
       if (is11th) qList.add('11th');
       if (is12th) qList.add('12th');
       if (isGraduate) qList.add('Graduate');
 
+      await _save();
+
+      if (!mounted) return;
+
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => DisplayInfo(
-            name: name,
-            email: email,
+            name: _nameController.text,
+            email: _emailController.text,
             gender: gender,
             qualification: qList.join(', '),
             city: city,
             height: value.round().toString(),
-            dob: "${data!.day}/${data!.month}/${data!.year}",
+            dob: '${data!.day}/${data!.month}/${data!.year}',
           ),
         ),
       );
@@ -323,9 +362,12 @@ class DisplayInfo extends StatelessWidget {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                    );
                   },
-                  child: const Text('Back'),
+                  child: const Text('Login'),
                 ),
               ],
             ),

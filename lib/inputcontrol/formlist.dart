@@ -14,6 +14,7 @@ class _FormListState extends State<FormList> {
   final nameCtrl = TextEditingController();
   String gender = 'M';
   bool agree = false;
+  int tmp_index = 0;
   List<Map<String, dynamic>> items = [];
   static const _key = 'entries';
 
@@ -52,6 +53,40 @@ class _FormListState extends State<FormList> {
     });
   }
 
+  Future<void> _update() async {
+    if (nameCtrl.text.trim().isEmpty) return;
+    items[tmp_index] = ({
+      'name': nameCtrl.text,
+      'gender': gender,
+      'agree': agree,
+    });
+    final pref = await SharedPreferences.getInstance();
+    await pref.setString(_key, jsonEncode(items));
+
+    nameCtrl.text = '';
+    setState(() {
+      gender = 'M';
+      agree = false;
+    });
+  }
+
+  Future<void> _updateIndex(index) async {
+    nameCtrl.text = items[index]['name'];
+    gender = items[index]['gender'];
+    agree = items[index]['agree'];
+    tmp_index = index;
+
+    setState(() {});
+  }
+
+  Future<void> _delete(index) async {
+    items.removeAt(index);
+    final pref = await SharedPreferences.getInstance();
+    await pref.setString(_key, jsonEncode(items));
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,16 +116,35 @@ class _FormListState extends State<FormList> {
               onChanged: (v) => setState(() => agree = v!),
             ),
             ElevatedButton(onPressed: _save, child: const Text('Save')),
+            ElevatedButton(onPressed: _update, child: const Text('update')),
             const SizedBox(height: 10),
             Expanded(
               child: ListView.builder(
                 itemCount: items.length,
                 itemBuilder: (context, index) {
                   final item = items[index];
+
                   return ListTile(
                     title: Text(item['name']),
                     subtitle: Text(
                       'Gender: ${item['gender']} | Agree: ${item['agree']}',
+                    ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.edit),
+                          onPressed: () {
+                            _updateIndex(index);
+                          },
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.delete),
+                          onPressed: () {
+                            _delete(index);
+                          },
+                        ),
+                      ],
                     ),
                   );
                 },
